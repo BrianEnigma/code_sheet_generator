@@ -10,7 +10,11 @@ Various generators, written in Processing, for creating code sheets (Morse, sema
 
 It works well for my iPhone 5s. Your mileage may vary.
 
-[example.jpg]
+![example](https://github.com/BrianEnigma/code_sheet_generator/blob/master/example.jpg)
+
+##Usage
+
+Just get one of the *.png files onto your smartphone and tell it to use that as the wallpaper. For best results, disable perspective zoom if you're given that option.
 
 ##Included Projects
 
