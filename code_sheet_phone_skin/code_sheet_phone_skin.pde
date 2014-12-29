@@ -1,8 +1,8 @@
 import processing.pdf.*;
 
 static final boolean EXPORT_PDF = false;
-static final boolean BACKGROUND = false;
-static final boolean DOT_BACKGROUND = false;
+static final boolean BACKGROUND = true;
+static final boolean DOT_BACKGROUND = true;
 
 static final String MORSE[] = 
 {
@@ -133,13 +133,14 @@ void drawSemaphore(int dots, int xPos, int yPos)
 
 void doText(String s, int x, int y, int r, int g, int b)
 {
-    fill(0, 0, 0, 64);
+    noStroke();
+    fill(0, 0, 0, 3);
+    for (int xOffset = -9; xOffset <= 9; xOffset++)
+        for (int yOffset = -9; yOffset <= 9; yOffset++)
+            text(s, x + xOffset, y + yOffset);
+    fill(0, 0, 0, 255);
     for (int xOffset = -3; xOffset <= 3; xOffset++)
         for (int yOffset = -3; yOffset <= 3; yOffset++)
-            text(s, x + xOffset, y + yOffset);
-    fill(0, 0, 0, 0);
-    for (int xOffset = -1; xOffset <= 1; xOffset++)
-        for (int yOffset = -1; yOffset <= 1; yOffset++)
             text(s, x + xOffset, y + yOffset);
     fill(r, g, b);
     text(s, x, y);
@@ -152,8 +153,8 @@ static final int COLUMN_WIDTHS[] = {
 
 void backgroundDots()
 {
-    final int DIAMETER = 10;
-    final int DISTANCE = 15;
+    final int DIAMETER = 32;
+    final int DISTANCE = 45;
     for (int y = 0; y < height; y += DISTANCE)
     {
         int offset = ((y / DISTANCE % 2) == 0) ? 0 : DISTANCE / 2;
@@ -161,7 +162,7 @@ void backgroundDots()
         {
             //fill(96);
             fill(128);
-            ellipse(x + offset + 1, y + 1, DIAMETER, DIAMETER);
+            ellipse(x + offset + 2, y + 2, DIAMETER, DIAMETER);
             fill(32);
             ellipse(x + offset, y, DIAMETER, DIAMETER);
         }
@@ -170,10 +171,11 @@ void backgroundDots()
 
 void backgroundLogo()
 {
+    final float SCALE = 1.75;
     PImage photo = loadImage("logo.png");
     
     tint(64);
-    image(photo, width / 2 - photo.width * 0.5 / 2, Y_OFFSET + 40, photo.width * 0.5, photo.height * 0.5);
+    image(photo, width / 2 - photo.width * SCALE / 2, Y_OFFSET + 40, photo.width * SCALE, photo.height * SCALE);
 }
 
 void backgroundMultiLogos()
@@ -303,7 +305,7 @@ void draw()
     
     // Horizontal separators
     stroke(64);
-    strokeWeight(2);
+    strokeWeight(3);
     for (int i = 0; i < 26; i += 3)
     {
         int yPos = i * ROW_HEIGHT + Y_OFFSET - ROW_HEIGHT + 18;
